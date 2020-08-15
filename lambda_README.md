@@ -35,7 +35,7 @@ Step 2: Run the following command on any tweeks
 ```
 conda activate DFD-deepvoodoo
 
-python /ParkCounty/home/SharedApp/DeepFaceLab_Linux/DFDNet_DeepVooDoo/test_FaceDict.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
 --test_name name-of-the-character \
 --test_dir path-to-input-images \
 --results_dir path-to-results \
@@ -50,7 +50,7 @@ Example
 ```
 conda activate DFD-deepvoodoo
 
-python /ParkCounty/home/SharedApp/DeepFaceLab_Linux/DFDNet_DeepVooDoo/test_FaceDict.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
 --test_name deepvoodoo \
 --test_dir ~/1-IMPORT \
 --results_dir ~/2-RESULTS \
