@@ -16,7 +16,8 @@ from skimage import transform as trans
 from skimage import io
 from data.image_folder import make_dataset
 import sys
-sys.path.append('FaceLandmarkDetection')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/FaceLandmarkDetection')
+
 import face_alignment
 
 import shutil
@@ -172,9 +173,9 @@ def main():
     print('####################### Step 1: Crop and Align Face ###########################')
     print('###############################################################################\n')
     
-    detector = dlib.cnn_face_detection_model_v1('./packages/mmod_human_face_detector.dat')
-    sp = dlib.shape_predictor('./packages/shape_predictor_5_face_landmarks.dat')
-    reference = np.load('./packages/FFHQ_template.npy') / 2
+    detector = dlib.cnn_face_detection_model_v1(os.path.dirname(os.path.abspath(__file__)) + '/packages/mmod_human_face_detector.dat')
+    sp = dlib.shape_predictor(os.path.dirname(os.path.abspath(__file__)) + '/packages/shape_predictor_5_face_landmarks.dat')
+    reference = np.load(os.path.dirname(os.path.abspath(__file__)) + '/packages/FFHQ_template.npy') / 2
     SaveInputPath = os.path.join(ResultsDir,'Step0_Input')
     if not os.path.exists(SaveInputPath):
         os.makedirs(SaveInputPath)

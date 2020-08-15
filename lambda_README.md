@@ -52,8 +52,8 @@ conda activate DFD-deepvoodoo
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
 --test_name deepvoodoo \
---test_dir ~/1-IMPORT \
---results_dir ~/2-RESULTS \
+--test_dir /ParkCounty/home/DFDNet_data/1-IMPORT \
+--results_dir /ParkCounty/home/DFDNet_data/2-RESULTS \
 --gpu_id 0 \
 --upscale 4 \
 --only_final 
@@ -61,8 +61,8 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
 
 
 * `test_name`: Name of the character. The input images are expected to be in `test_dir/test_name`, the output results will be stored in `results_dir/test_name`. Default: `deepvoodoo`
-* `test_dir`: Folder to store subfolders of test images. Default: `~/1-IMPORT`
-* `results_dir`: Folder to store subfolders of results. Default: `~/2-RESULTS`
+* `test_dir`: Folder to store subfolders of test images. Default: `/ParkCounty/home/DFDNet_data/1-IMPORT`
+* `results_dir`: Folder to store subfolders of results. Default: `/ParkCounty/home/DFDNet_data/2-RESULTS`
 * `gpu_id`: Index of GPU. Default 
 * `upscale`: Upscale factor. The input crops are resized to `512`. The output result will be `512`x`upscale`
 * `only_final`: Add this flag to only save results of Step3 and Step4.

@@ -358,7 +358,7 @@ class VGGFeat(torch.nn.Module):
     """
     Input: (B, C, H, W), RGB, [-1, 1]
     """
-    def __init__(self, weight_path='./weights/vgg19.pth'):
+    def __init__(self, weight_path=os.path.dirname(os.path.abspath(__file__)) + '/../weights/vgg19.pth'):
         super().__init__()
         self.model = models.vgg19(pretrained=False)
         self.build_vgg_layers()
@@ -421,7 +421,7 @@ def AttentionBlock(in_channel):
     )
 
 class UNetDictFace(nn.Module):
-    def __init__(self, ngf=64, dictionary_path='./DictionaryCenter512'):
+    def __init__(self, ngf=64, dictionary_path=os.path.dirname(os.path.abspath(__file__)) + '/../DictionaryCenter512'):
         super().__init__()
         
         self.part_sizes = np.array([80,80,50,110]) # size for 512
