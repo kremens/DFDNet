@@ -1,0 +1,5 @@
+*.pyc
+DictionaryCenter512/*
+Results/*
+checkpoints/*
+weights/*

@@ -1,5 +1,5 @@
 from .base_options import BaseOptions
-
+import os
 
 class TestOptions(BaseOptions):
     def initialize(self, parser):
@@ -8,7 +8,7 @@ class TestOptions(BaseOptions):
         parser.add_argument('--dataroot', type=str, default='', help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
         parser.add_argument('--phase', type=str, default='', help='train, val, test, etc')
         parser.add_argument('--ntest', type=int, default=float("inf"), help='# of test examples.')
-        parser.add_argument('--results_dir', type=str, default='./results/', help='saves results here.')
+        parser.add_argument('--results_dir', type=str, default=os.path.expanduser("~") + '/2-RESULTS', help='saves results here.')
         parser.add_argument('--aspect_ratio', type=float, default=1.0, help='aspect ratio of result images')
         parser.add_argument('--which_epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
         parser.add_argument('--how_many', type=int, default=float("inf"), help='how many test images to run')
@@ -26,6 +26,14 @@ class TestOptions(BaseOptions):
         parser.add_argument('--p4', type=int, default=0, help='')
         parser.add_argument('--p5', type=str, default='', help='')
         parser.add_argument('--p6', type=str, default='', help='')
-        
+
+        # DeepVooDoo options
+        parser.add_argument('--test_name', type=str, default='deepvoodoo', help='Name of the dataset.')
+        parser.add_argument('--test_dir', type=str, default=os.path.expanduser("~") + '/1-IMPORT', help='Directory to import testing images.')
+        parser.add_argument('--gpu_id', type=int, default=0, help="Which gpu to run on.  default is 0")
+        parser.add_argument('--upscale', type=int, default=4, help="The upsample scale")
+        parser.add_argument('--only_final', action="store_true", default=None, help='Only save the final output')
+
+  
         self.isTrain = False
         return parser
