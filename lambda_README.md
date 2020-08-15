@@ -78,7 +78,7 @@ python /ParkCounty/home/SharedApp/DeepFaceLab_Linux/DFDNet_DeepVooDoo/test_FaceD
   <img src='./Imgs/parker_input.jpg' width="512">
   </td>
   <td>
-  <img src='./Imgs/parker_output.jpg' width="476">
+  <img src='./Imgs/parker_output.jpg' width="512">
   </td>
  </tr>
   
