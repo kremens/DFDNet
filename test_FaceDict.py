@@ -149,19 +149,17 @@ def main():
     opt.no_flip = True  # no flip
     opt.display_id = -1  # no visdom display
     opt.which_epoch = 'latest' #
+    opt.enchanced_folder_name = 'enchanced_' + str(opt.upscale)
 
-    if not os.path.exists(opt.test_dir):
-        os.makedirs(opt.test_dir)
-
-    if not os.path.exists(opt.results_dir):
-        os.makedirs(opt.results_dir)
+    if not os.path.exists(opt.test_dir + '_' + opt.enchanced_folder_name):
+        os.makedirs(opt.test_dir + '_' + opt.enchanced_folder_name)
 
     #######################################################################
     ########################### Test Param ################################
     #######################################################################
     opt.gpu_ids = [opt.gpu_id] # gpu id. if use cpu, set opt.gpu_ids = []
-    TestImgPath = opt.test_dir + '/' + opt.test_name # test image path
-    ResultsDir = opt.results_dir + '/' + opt.test_name  #save path 
+    TestImgPath = opt.test_dir # test image path
+    ResultsDir = opt.test_dir + '_' + opt.enchanced_folder_name  #save path 
     UpScaleWhole = opt.upscale  # the upsamle scale. It should be noted that our face results are fixed to 512.
 
     print('\n###################### Now Running the X {} task ##############################'.format(UpScaleWhole))

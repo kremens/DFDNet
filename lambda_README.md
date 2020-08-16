@@ -30,15 +30,13 @@ Unzip and put them to DFDNet root directory.
 
 Step 1: Copy test images to somewhere `path-to-input-images` on your machine.
 
-Step 2: Run the following command on any tweeks 
+Step 2: Run the following command on any tweeks. The result will be saved to `path-to-input-images_enhanced_upscale`
 
 ```
 conda activate DFD-deepvoodoo
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
---test_name name-of-the-character \
 --test_dir path-to-input-images \
---results_dir path-to-results \
 --gpu_id 0 \
 --upscale your-scale \
 --only_final 
@@ -51,21 +49,17 @@ Example
 conda activate DFD-deepvoodoo
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
---test_name deepvoodoo \
---test_dir /ParkCounty/home/DFDNet_data/1-IMPORT \
---results_dir /ParkCounty/home/DFDNet_data/2-RESULTS \
+--test_dir /ParkCounty/home/DFDNet_data/test \
 --gpu_id 0 \
 --upscale 4 \
 --only_final 
 ```
 
 
-* `test_name`: Name of the character. The input images are expected to be in `test_dir/test_name`, the output results will be stored in `results_dir/test_name`. Default: `deepvoodoo`
-* `test_dir`: Folder to store subfolders of test images. Default: `/ParkCounty/home/DFDNet_data/1-IMPORT`
-* `results_dir`: Folder to store subfolders of results. Default: `/ParkCounty/home/DFDNet_data/2-RESULTS`
+* `test_dir`: Folder to store subfolders of test images. Default: `/ParkCounty/home/DFDNet_data/test`. Enhanced results will be put into `test_dir_enhanced_upscale`
 * `gpu_id`: Index of GPU. Default 
-* `upscale`: Upscale factor. The input crops are resized to `512`. The output result will be `512`x`upscale`
-* `only_final`: Add this flag to only save results of Step3 and Step4.
+* `upscale`: Upscale factor. If the input image (`Step0_Input`) is of size `512`, the final result (`Step4_FinalResults`) will be `512`x`upscale`. The crops, however, are always of size `512`.
+* `only_final`: Add this flag to only save results for Step3 and Step4.
 
 ### Results
 
