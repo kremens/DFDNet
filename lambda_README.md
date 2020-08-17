@@ -56,7 +56,7 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
 ```
 
 
-* `test_dir`: Folder to store subfolders of test images. Default: `/ParkCounty/home/DFDNet_data/test`. Enhanced results will be put into `test_dir_enhanced_upscale`
+* `test_dir`: Folder to store test images. Default: `/ParkCounty/home/DFDNet_data/test`. Enhanced results will be put into `test_dir_enhanced_upscale`
 * `gpu_id`: Index of GPU. Default 
 * `upscale`: Upscale factor. If the input image (`Step0_Input`) is of size `512`, the final result (`Step4_FinalResults`) will be `512`x`upscale`. The crops, however, are always of size `512`.
 * `only_final`: Add this flag to only save results for Step3 and Step4.
