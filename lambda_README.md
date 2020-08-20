@@ -31,7 +31,7 @@ Unzip and put them to DFDNet root directory.
 
 #### Run DFD on DFL aligned src/dst Images
 
-- `aligned_dir`: Folder for DFL extracted dst images
+- `aligned_dir`: Folder for DFL extracted src/dst images
 
 ```
 # Call test_FaceDict_aligned.py
