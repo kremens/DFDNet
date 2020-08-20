@@ -35,7 +35,8 @@ Unzip and put them to DFDNet root directory.
 
 ```
 # Call test_FaceDict_aligned.py
-# Output will be saved in path-to-input-images_enchanced
+# Optional: Use --blur_radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
+# Output will be saved in path-to-input-images_enchanced_rblur_radius
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
 --test_dir path-to-input-images \
@@ -61,7 +62,8 @@ Make sure all images in `test_dir` has its corresponding images in `aligned_dir`
 # Call test_FaceDict_aligned.py
 # Need to pass --aligned_dir so landmarks can be extracted. 
 # Optional: Use --aligned_postfix to replace '.png' in the merged image name. Default is '_0.jpg'
-# Output will be saved in path-to-input-images_enchanced
+# Optional: Use --blur_radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
+# Output will be saved in path-to-input-images_enchanced_rblur_radius
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
 --test_dir path-to-input-images \
