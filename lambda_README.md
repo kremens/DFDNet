@@ -31,53 +31,53 @@ Unzip and put them to DFDNet root directory.
 
 #### Run DFD on DFL aligned src/dst Images
 
-- `aligned_dir`: Folder for DFL extracted src/dst images
+- `aligned-dir`: Folder for DFL extracted src/dst images
 
 ```
 # Call test_FaceDict_aligned.py
-# Optional: Use --blur_radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
+# Optional: Use --blur-radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
 # Output will be saved in path-to-input-images_enchanced_rblur_radius
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
---test_dir path-to-input-images \
---gpu_id 0
+--test-dir path-to-input-images \
+--gpu-id 0
 ```
 
 Example
 
 ```
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
---test_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
---gpu_id 0
+--test-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
+--gpu-id 0
 ```
 
 
 #### Run DFD on DFL rawmerged Images 
 
-- `test_dir`: Folder for rawmerged images
-- `aligned_dir`: Folder for DFL extracted dst images. We need it to extract landmarks. 
-Make sure all images in `test_dir` has its corresponding images in `aligned_dir`
+- `test-dir`: Folder for rawmerged images
+- `aligned-dir`: Folder for DFL extracted dst images. We need it to extract landmarks. 
+Make sure all images in `test-dir` has its corresponding images in `aligned-dir`
 
 ```
 # Call test_FaceDict_aligned.py
-# Need to pass --aligned_dir so landmarks can be extracted. 
-# Optional: Use --aligned_postfix to replace '.png' in the merged image name. Default is '_0.jpg'
-# Optional: Use --blur_radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
+# Need to pass --aligned-dir so landmarks can be extracted. 
+# Optional: Use --aligned-postfix to replace '.png' in the merged image name. Default is '_0.jpg'
+# Optional: Use --blur-radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
 # Output will be saved in path-to-input-images_enchanced_rblur_radius
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
---test_dir path-to-input-images \
---aligned_dir path-to-aligned-images \
---gpu_id 0
+--test-dir path-to-input-images \
+--aligned-dir path-to-aligned-images \
+--gpu-id 0
 ```
 
 Example
 
 ```
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
---test_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/merge_rawpred \
---aligned_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
---gpu_id 0
+--test-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/merge_rawpred \
+--aligned-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
+--gpu-id 0
 ```
 
 #### Run All Steps (include alignment and detection) on Whole Image
@@ -90,10 +90,10 @@ Step 2: Run the following command on any tweeks. The result will be saved to `pa
 conda activate DFD-deepvoodoo
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
---test_dir path-to-input-images \
---gpu_id 0 \
+--test-dir path-to-input-images \
+--gpu-id 0 \
 --upscale your-scale \
---only_final 
+--only-final 
 
 ```
 
@@ -103,17 +103,17 @@ Example
 conda activate DFD-deepvoodoo
 
 python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
---test_dir /ParkCounty/home/DFDNet_data/test \
---gpu_id 0 \
+--test-dir /ParkCounty/home/DFDNet_data/test \
+--gpu-id 0 \
 --upscale 4 \
---only_final 
+--only-final 
 ```
 
 
-* `test_dir`: Folder to store test images. Default: `/ParkCounty/home/DFDNet_data/test`. Enhanced results will be put into `test_dir_enhanced_upscale`
-* `gpu_id`: Index of GPU. Default 
+* `test-dir`: Folder to store test images. Default: `/ParkCounty/home/DFDNet_data/test`. Enhanced results will be put into `test_dir_enhanced_upscale`
+* `gpu-id`: Index of GPU. Default 
 * `upscale`: Upscale factor. If the input image (`Step0_Input`) is of size `512`, the final result (`Step4_FinalResults`) will be `512`x`upscale`. The crops, however, are always of size `512`.
-* `only_final`: Add this flag to only save results for Step3 and Step4.
+* `only-final`: Add this flag to only save results for Step3 and Step4.
 
 ### Results
 
