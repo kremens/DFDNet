@@ -228,8 +228,7 @@ def main():
     opt.which_epoch = 'latest' #
     opt.enchanced_folder_name = 'enchanced'
 
-    if not os.path.exists(opt.test_dir + '_' + opt.enchanced_folder_name):
-        os.makedirs(opt.test_dir + '_' + opt.enchanced_folder_name)
+
 
     #######################################################################
     ########################### Test Param ################################
@@ -237,8 +236,11 @@ def main():
     opt.gpu_ids = [opt.gpu_id] # gpu id. if use cpu, set opt.gpu_ids = []
     TestImgPath = opt.test_dir # test image path
     AlignedImgPath = opt.aligned_dir # aligned image path
-    ResultsDir = opt.test_dir + '_' + opt.enchanced_folder_name  #save path 
+    ResultsDir = opt.test_dir.rstrip('/') + '_' + opt.enchanced_folder_name  #save path 
 
+    if not os.path.exists(ResultsDir):
+        os.makedirs(ResultsDir)
+        
     print('Creating model ... ')
     model = create_model(opt)
     model.setup(opt)
@@ -248,30 +250,31 @@ def main():
     ImgNames.sort()
 
     for i, ImgName in enumerate(ImgNames):
-        # print(ImgName)
-        if not opt.aligned_dir:
-            data = obtain_inputs(TestImgPath, ImgName, 'real')
-        else:
-            data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real')
-            data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real')
-            data['Part_locations'] = data_aligned['Part_locations']
-        
-        if data == 0:
-            print ('Skipping ' + ImgName + ' data not found');
-            continue
-        model.set_input(data)
-        model.test()
-        visuals = model.get_current_visuals()
-        img_path = model.get_image_paths()
+        if ImgName.endswith(".jpg") or ImgName.endswith(".png"):
+            # print(ImgName)
+            if not opt.aligned_dir:
+                data = obtain_inputs(TestImgPath, ImgName, 'real')
+            else:
+                data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real')
+                data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real')
+                data['Part_locations'] = data_aligned['Part_locations']
+            
+            if data == 0:
+                print ('Skipping ' + ImgName + ' data not found');
+                continue
+            model.set_input(data)
+            model.test()
+            visuals = model.get_current_visuals()
+            img_path = model.get_image_paths()
 
-        output_path = ResultsDir + '/' + ImgName
-        print(output_path)
+            output_path = os.path.join(ResultsDir, ImgName)
+            print(output_path)
 
-        for label, image in visuals.items():
-            if label == 'fake_A':
-                image_numpy = util.tensor2im(image)
-                image_pil = Image.fromarray(image_numpy)
-                image_pil.save(output_path)
+            for label, image in visuals.items():
+                if label == 'fake_A':
+                    image_numpy = util.tensor2im(image)
+                    image_pil = Image.fromarray(image_numpy)
+                    image_pil.save(output_path)
 
 
 if __name__ == '__main__':
