@@ -28,6 +28,58 @@ Unzip and put them to DFDNet root directory.
 
 ### Usage
 
+
+#### Run DFD on DFL aligned src/dst Images
+
+- `aligned_dir`: Folder for DFL extracted dst images
+
+```
+# Call test_FaceDict_aligned.py
+# Output will be saved in path-to-input-images_enchanced
+
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+--test_dir path-to-input-images \
+--gpu_id 0
+```
+
+Example
+
+```
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+--test_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
+--gpu_id 0
+```
+
+
+#### Run DFD on DFL rawmerged Images 
+
+- `test_dir`: Folder for rawmerged images
+- `aligned_dir`: Folder for DFL extracted dst images. We need it to extract landmarks. 
+Make sure all images in `test_dir` has its corresponding images in `aligned_dir`
+
+```
+# Call test_FaceDict_aligned.py
+# Need to pass --aligned_dir so landmarks can be extracted. 
+# Optional: Use --aligned_postfix to replace '.png' in the merged image name. Default is '_0.jpg'
+# Output will be saved in path-to-input-images_enchanced
+
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+--test_dir path-to-input-images \
+--aligned_dir path-to-aligned-images \
+--gpu_id 0
+```
+
+Example
+
+```
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+--test_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/merge_rawpred \
+--aligned_dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
+--gpu_id 0
+```
+
+#### Run All Steps (include alignment and detection) on Whole Image
+
 Step 1: Copy test images to somewhere `path-to-input-images` on your machine.
 
 Step 2: Run the following command on any tweeks. The result will be saved to `path-to-input-images_enhanced_upscale`
