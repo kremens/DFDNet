@@ -8,7 +8,8 @@ from util import html
 from util import util
 import numpy as np
 import math
-from PIL import Image
+from PIL import Image, ImageFilter
+
 import torchvision.transforms as transforms
 import torch
 import random
@@ -172,9 +173,12 @@ def main():
         return torch.from_numpy(Location_LE).unsqueeze(0), torch.from_numpy(Location_RE).unsqueeze(0), torch.from_numpy(Location_NO).unsqueeze(0), torch.from_numpy(Location_MO).unsqueeze(0)
 
     
-    def obtain_inputs(img_path, img_name, Type):
+    def obtain_inputs(img_path, img_name, Type, radius):
         A_paths = os.path.join(img_path,img_name)
         Imgs = Image.open(A_paths).convert('RGB')
+        if radius > 0:
+            Imgs = Imgs.filter(ImageFilter.GaussianBlur(radius = radius))
+
         dfl_image = load_data(A_paths)
 
         Part_locations = get_part_location(dfl_image, Imgs)
@@ -198,10 +202,11 @@ def main():
         return {'A':A.unsqueeze(0), 'C':C.unsqueeze(0), 'A_paths': A_paths,'Part_locations': Part_locations}
         
 
-    def obtain_inputs_without_parts(img_path, img_name, Type):
+    def obtain_inputs_without_parts(img_path, img_name, Type, radius):
         A_paths = os.path.join(img_path,img_name)
         Imgs = Image.open(A_paths).convert('RGB')
-
+        if radius > 0:
+            Imgs = Imgs.filter(ImageFilter.GaussianBlur(radius = radius)) 
 
         width, height = Imgs.size
         L = min(width, height)
@@ -226,8 +231,7 @@ def main():
     opt.no_flip = True  # no flip
     opt.display_id = -1  # no visdom display
     opt.which_epoch = 'latest' #
-    opt.enchanced_folder_name = 'enchanced'
-
+    opt.enchanced_folder_name = 'enchanced_r' + str(opt.blur_radius)
 
 
     #######################################################################
@@ -253,15 +257,16 @@ def main():
         if ImgName.endswith(".jpg") or ImgName.endswith(".png"):
             # print(ImgName)
             if not opt.aligned_dir:
-                data = obtain_inputs(TestImgPath, ImgName, 'real')
+                data = obtain_inputs(TestImgPath, ImgName, 'real', opt.blur_radius)
             else:
-                data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real')
-                data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real')
+                data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real', opt.blur_radius)
+                data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real', opt.blur_radius)
                 data['Part_locations'] = data_aligned['Part_locations']
             
             if data == 0:
                 print ('Skipping ' + ImgName + ' data not found');
                 continue
+
             model.set_input(data)
             model.test()
             visuals = model.get_current_visuals()
