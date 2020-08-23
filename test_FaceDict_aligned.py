@@ -26,7 +26,7 @@ import face_alignment
 import shutil
 
 from dfl.dfl_read import load_data
-
+from dfl.DFLJPG import DFLJPG
 
 # Chuan: Add this line to avoid CUDNN error
 torch.backends.cudnn.enabled = False
@@ -199,7 +199,7 @@ def main():
         A = transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))(A) #
         C = transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))(C) #
 
-        return {'A':A.unsqueeze(0), 'C':C.unsqueeze(0), 'A_paths': A_paths,'Part_locations': Part_locations}
+        return dfl_image, {'A':A.unsqueeze(0), 'C':C.unsqueeze(0), 'A_paths': A_paths,'Part_locations': Part_locations}
         
 
     def obtain_inputs_without_parts(img_path, img_name, Type, radius):
@@ -255,14 +255,13 @@ def main():
 
     for i, ImgName in enumerate(ImgNames):
         if ImgName.endswith(".jpg") or ImgName.endswith(".png"):
-            # print(ImgName)
             if not opt.aligned_dir:
-                data = obtain_inputs(TestImgPath, ImgName, 'real', opt.blur_radius)
+                dfl_image, data = obtain_inputs(TestImgPath, ImgName, 'real', opt.blur_radius)
             else:
-                data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real', opt.blur_radius)
+                dfl_image_aligned, data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real', opt.blur_radius)
                 data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real', opt.blur_radius)
                 data['Part_locations'] = data_aligned['Part_locations']
-            
+
             if data == 0:
                 print ('Skipping ' + ImgName + ' data not found');
                 continue
@@ -272,6 +271,10 @@ def main():
             visuals = model.get_current_visuals()
             img_path = model.get_image_paths()
 
+            # Make sure ImgName has jpg format for DFLJPG to work
+            if ImgName.endswith(".png"):
+                ImgName = ImgName[:-4] + '.jpg'
+
             output_path = os.path.join(ResultsDir, ImgName)
             print(output_path)
 
@@ -280,6 +283,13 @@ def main():
                     image_numpy = util.tensor2im(image)
                     image_pil = Image.fromarray(image_numpy)
                     image_pil.save(output_path)
+                    dfl_image_new = DFLJPG.load(output_path)
+                    if not opt.aligned_dir:
+                        dfl_image_new.set_dict(dfl_image.dfl_dict)
+                    else:
+                        dfl_image_new.set_dict(dfl_image_aligned.dfl_dict)
+                    dfl_image_new.save()
+
 
 
 if __name__ == '__main__':
