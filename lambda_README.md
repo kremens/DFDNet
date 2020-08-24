@@ -132,3 +132,14 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict.py  \
   
  </table>
 
+
+#### Metadata
+
+When you run `test_FaceDict_aligned.py` with `scr` or `dst` images, DFD will write metadata (landmarks etc) to the enchanced images. This allows the enchenced images to continue be used as training images. 
+
+However, when you run `test_FaceDict_aligned.py` with `rawmerged` images, DFD does not write metadata to the results. Notice landmarks do not exist in the original `rawmerged` images, and are not needed for the downstream tasks. 
+
+
+#### Output format
+
+We use the maximum JPG quality setting to write the enhanced `src/dsc` images, and lossless PNG setting to write the enchanced `rawmerged` images.

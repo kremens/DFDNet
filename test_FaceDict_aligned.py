@@ -279,13 +279,16 @@ def main():
                     image_numpy = util.tensor2im(image)
                     image_pil = Image.fromarray(image_numpy)
                     
-                    image_pil.save(output_path, optimize=True, quality=100, subsampling=0)
-
                     # Only write meta data into scr/dst, not to merged data
                     if not opt.aligned_dir:
+                        # Use the highest possible setting to write JPG
+                        image_pil.save(output_path, optimize=True, quality=100, subsampling=0)
                         dfl_image_new = DFLJPG.load(output_path)
                         dfl_image_new.set_dict(dfl_image.dfl_dict)
                         dfl_image_new.save()
+                    else:
+                        # Default compression_level=6 gives lossless results for PNG
+                        image_pil.save(output_path)
 
 
 
