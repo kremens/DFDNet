@@ -271,10 +271,6 @@ def main():
             visuals = model.get_current_visuals()
             img_path = model.get_image_paths()
 
-            # Make sure ImgName has jpg format for DFLJPG to work
-            if ImgName.endswith(".png"):
-                ImgName = ImgName[:-4] + '.jpg'
-
             output_path = os.path.join(ResultsDir, ImgName)
             print(output_path)
 
@@ -282,13 +278,14 @@ def main():
                 if label == 'fake_A':
                     image_numpy = util.tensor2im(image)
                     image_pil = Image.fromarray(image_numpy)
-                    image_pil.save(output_path)
-                    dfl_image_new = DFLJPG.load(output_path)
+                    
+                    image_pil.save(output_path, optimize=True, quality=100, subsampling=0)
+
+                    # Only write meta data into scr/dst, not to merged data
                     if not opt.aligned_dir:
+                        dfl_image_new = DFLJPG.load(output_path)
                         dfl_image_new.set_dict(dfl_image.dfl_dict)
-                    else:
-                        dfl_image_new.set_dict(dfl_image_aligned.dfl_dict)
-                    dfl_image_new.save()
+                        dfl_image_new.save()
 
 
 
