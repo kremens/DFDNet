@@ -62,6 +62,7 @@ Make sure all images in `test-dir` has its corresponding images in `aligned-dir`
 # Call test_FaceDict_aligned.py
 # Need to pass --aligned-dir so landmarks can be extracted. 
 # Optional: Use --aligned-postfix to replace '.png' in the merged image name. Default is '_0.jpg'
+# Optional: Use --aligned-old and --aligned-new to replace an arbitary sub string in the merged image name to match the aligned image name.
 # Optional: Use --blur-radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
 # Output will be saved in path-to-input-images_enchanced_rblur_radius
 
