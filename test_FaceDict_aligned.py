@@ -260,7 +260,7 @@ def main():
             else:
                 new_path = '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix
                 if opt.aligned_old and opt.aligned_new:
-                    new_path.replace(opt.aligned_old, opt.aligned_new)
+                    new_path = new_path.replace(opt.aligned_old, opt.aligned_new)
 
                 dfl_image_aligned, data_aligned = obtain_inputs(AlignedImgPath, new_path, 'real', opt.blur_radius)
                 data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real', opt.blur_radius)
