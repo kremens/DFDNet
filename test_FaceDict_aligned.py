@@ -258,7 +258,11 @@ def main():
             if not opt.aligned_dir:
                 dfl_image, data = obtain_inputs(TestImgPath, ImgName, 'real', opt.blur_radius)
             else:
-                dfl_image_aligned, data_aligned = obtain_inputs(AlignedImgPath, '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix, 'real', opt.blur_radius)
+                new_path = '.'.join(ImgName.split('.')[:-1]) + opt.aligned_postfix
+                if opt.aligned_old and opt.aligned_new:
+                    new_path.replace(opt.aligned_old, opt.aligned_new)
+
+                dfl_image_aligned, data_aligned = obtain_inputs(AlignedImgPath, new_path, 'real', opt.blur_radius)
                 data = obtain_inputs_without_parts(TestImgPath, ImgName, 'real', opt.blur_radius)
                 data['Part_locations'] = data_aligned['Part_locations']
 

@@ -34,6 +34,8 @@ class TestOptions(BaseOptions):
         parser.add_argument('--only-final', dest="only_final", action="store_true", default=None, help='Only save the final output')
         parser.add_argument('--aligned-dir', dest="aligned_dir", type=str, default='', help='Directory to import aligned dst images. This is needed for running DFD on raw_predict merged data.')
         parser.add_argument('--aligned-postfix', dest="aligned_postfix", type=str, default='_0.jpg', help='Postfix to replace the png format part in image path. Default is set to _0.jpg')
+        parser.add_argument('--aligned-old',  dest="aligned_old", type=str, default='', help='Old sub string in the path of image name to be replaced')
+        parser.add_argument('--aligned-new',  dest="aligned_new", type=str, default='', help='New sub string in the path of image name to be replaced by')
         parser.add_argument('--blur-radius', dest="blur_radius", type=float, default=0, help='Radius of Gaussian Blur filters for input image')
         self.isTrain = False
         return parser
