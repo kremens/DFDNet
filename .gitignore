@@ -3,3 +3,5 @@ DictionaryCenter512/*
 Results/*
 checkpoints/*
 weights/*
+generate_options.py
+options.json

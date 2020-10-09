@@ -38,7 +38,7 @@ Unzip and put them to DFDNet root directory.
 # Optional: Use --blur-radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
 # Output will be saved in path-to-input-images_enchanced_rblur_radius
 
-python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/dfd.py  \
 --test-dir path-to-input-images \
 --gpu-id 0
 ```
@@ -46,7 +46,7 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned
 Example
 
 ```
-python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/dfd.py  \
 --test-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
 --gpu-id 0
 ```
@@ -59,14 +59,14 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned
 Make sure all images in `test-dir` has its corresponding images in `aligned-dir`
 
 ```
-# Call test_FaceDict_aligned.py
+# Call dfd.py
 # Need to pass --aligned-dir so landmarks can be extracted. 
 # Optional: Use --aligned-postfix to replace '.png' in the merged image name. Default is '_0.jpg'
 # Optional: Use --aligned-old and --aligned-new to replace an arbitary sub string in the merged image name to match the aligned image name.
 # Optional: Use --blur-radius to blur the input image before DFD. Useful for removing some artifacts in high resolution merged images. Default 0 (no blur). https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html#PIL.ImageFilter.GaussianBlur
 # Output will be saved in path-to-input-images_enchanced_rblur_radius
 
-python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/dfd.py  \
 --test-dir path-to-input-images \
 --aligned-dir path-to-aligned-images \
 --gpu-id 0
@@ -75,7 +75,7 @@ python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned
 Example
 
 ```
-python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/test_FaceDict_aligned.py  \
+python /ParkCounty/home/SharedApp/DFDNet/DFDNet_DeepVooDoo/dfd.py  \
 --test-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/merge_rawpred \
 --aligned-dir /ParkCounty/home/DFDNet_data/DFL_ALIGNED_RAWPRED/aligned_frames \
 --gpu-id 0
