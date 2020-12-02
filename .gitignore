@@ -5,3 +5,5 @@ checkpoints/*
 weights/*
 generate_options.py
 options.json
+FaceLandmarkDetection/*
+FaceLandmarkDetection/face_alignment/__pycache__/*.pyc
